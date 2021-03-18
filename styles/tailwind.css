@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+
+      [type='text'],
+      [type='email'],
+      [type='url'],
+      [type='password'],
+      [type='number'],
+      [type='date'],
+      [type='datetime-local'],
+      [type='month'],
+      [type='search'],
+      [type='tel'],
+      [type='time'],
+      [type='week'],
+      [multiple],
+      textarea,
+      select
+{
+        @apply w-full shadow-md rounded-sm border-blue-200 focus:outline-none focus:ring-1 focus:border-blue-300
+    }
+}
+
+@layer components{
+   
+    body{
+      @apply bg-blue-50 overflow-x-hidden
+    }
+    
+    /* a{
+    @apply cursor-pointer;
+    } */
+    
+    .smallInnerFormContainer{
+      @apply flex flex-col w-full p-8 mx-auto bg-gray-50 border rounded-lg shadow-lg lg:w-2/6 md:w-1/2 md:ml-auto md:mt-0
+    }
+    .largeInnerFormContainer{
+      @apply flex flex-col w-full p-8 mx-auto bg-gray-50 border rounded-lg shadow-lg sm:w-1/2 sm:ml-auto sm:mt-0
+    }
+    
+    
+    .profile-side-bar{
+      @apply cursor-pointer transform transition duration-500 ease-in-out bg-gradient-to-r bg-white  p-2 m-1 text-center shadow-sm hover:from-blue-300 hover:to-blue-700 hover:text-white
+    }
+    
+    .profile-side-bar-active{
+      @apply border-l-2 border-blue-500 rounded-tl-full rounded-bl-full
+    }
+
+    .errorControl{
+        @apply border-red-600 border border-solid
+    }
+    .errorText{
+        @apply text-red-600
+    }
+    
+     }
