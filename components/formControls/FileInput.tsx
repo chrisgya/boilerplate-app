@@ -41,12 +41,13 @@ const FileInput = ({ name, files, setFiles, disabled, label, ...rest }: FileInpu
         control={control}
         name={name}
         defaultValue={[]}
-        render={({ onBlur, value }) => (
+        render={({ field: { onBlur, value } }) => (
           <>
             <Dropzone onDrop={onDrop}>
               {({ isDragActive, getRootProps, getInputProps }) => (
                 <div {...getRootProps()}
-                  className={cx("border-dashed border-2 p-5 text-center focus:outline-none font-bold text-gray-400 cursor-pointer rounded-lg", isDragActive && " border-blue-500")}
+                  className={cx("border-dashed border-2 p-5 text-center focus:outline-none font-bold text-gray-400 cursor-pointer rounded-lg",
+                    isDragActive && " border-blue-500")}
                 >
                   <input {...getInputProps()} name={name} onBlur={onBlur} disabled={disabled} {...rest} />
                   <p>{label ? label : `Drag 'n' drop files here, or click to select files`}</p>

@@ -5,7 +5,7 @@ import cx from "classnames";
 import { format } from "date-fns";
 
 type DatePickerProps = CalendarProps & {
-  name: string;
+  name: any;
   intialValue: Date | null;
   dateFormat?: string;
   maxDate?: Date;
@@ -56,11 +56,11 @@ export const CalendarDropdown = ({
         value={inputValue ? inputValue : intialValue ? format(intialValue, dateFormat) : ""}
         readOnly={true}
         onFocus={() => toggleCalendar(true)}
-        className={cx(formState.touched[name] && formState.errors[name] && "errorControl")} />
+        className={cx(formState.errors[name] && "errorControl")} />
       <Controller
         control={control}
         name={name}
-        render={({ value }) => (
+        render={({ field: { value }, }) => (
           <>
             {showCalendar && (
               <Calendar
@@ -71,7 +71,7 @@ export const CalendarDropdown = ({
                 minDate={minDate}
               />
             )}
-            {formState.touched[name] && formState.errors[name] && (
+            {formState.errors[name] && (
               <p className="errorText">{formState.errors[name].message}</p>
             )}
           </>

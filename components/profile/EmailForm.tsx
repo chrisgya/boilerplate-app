@@ -44,7 +44,7 @@ const EmailForm = () => {
 
                     <div className="flex flex-wrap">
                         <div className="w-3/4 pr-2">
-                            <Input name="email" type="email" ref={methods.register} label="Email" disabled={mutation.isLoading} />
+                            <Input name="email" type="email" label="Email" disabled={mutation.isLoading} />
                         </div>
 
                         <div className="w-1/4 pl-2 mr-auto mt-7">

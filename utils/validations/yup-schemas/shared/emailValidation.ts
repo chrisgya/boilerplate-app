@@ -1,7 +1,6 @@
-import * as yup from "yup";
+import { string } from "yup";
 
-export const EmailValidation = yup
-  .string()
+export const EmailValidation = string()
   .email()
   .min(3)
   .max(500)

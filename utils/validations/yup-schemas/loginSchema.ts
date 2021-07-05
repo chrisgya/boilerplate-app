@@ -1,8 +1,7 @@
-import * as yup from "yup";
+import { object, string } from "yup";
 
-export const loginSchema = yup.object().shape({
-    email: yup.string().email().required(),
-    password: yup
-        .string()
+export const loginSchema = object().shape({
+    email: string().email().required(),
+    password: string()
         .required()
 });

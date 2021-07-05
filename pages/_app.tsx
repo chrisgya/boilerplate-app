@@ -10,6 +10,12 @@ import 'react-calendar/dist/Calendar.css';
 import 'react-time-picker/dist/TimePicker.css';
 import 'react-clock/dist/Clock.css';
 
+// dateTimePicker
+import 'react-datetime-picker/dist/DateTimePicker.css';
+//import 'react-calendar/dist/Calendar.css';
+//import ' react-clock/dist/Clock.css';
+
+
 import 'quill/dist/quill.snow.css'; // Add css for snow theme
 // or import 'quill/dist/quill.bubble.css'; // Add css for bubble theme
 

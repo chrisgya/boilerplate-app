@@ -11,7 +11,8 @@ import {
     ICreateRoleRequest,
     IPermission,
     IErrorMessage,
-    roleSchema
+    roleSchema,
+    IRole
 } from '../../utils';
 import { Button, Input, Textarea } from '../formControls';
 import FormTitleAndError from '../layout/FormTitleAndError';
@@ -39,7 +40,7 @@ const RoleForm = ({ onClose }: IProp) => {
 
     const getAxiosParams = () => {
         const params = new URLSearchParams();
-        if (searchByName && searchByName === '') params.append("name", searchByName);
+        if (searchByName && searchByName !== '') params.append("name", searchByName);
 
         if (sorter) {
             const sortSplitter = sorter.split('-');
@@ -69,7 +70,7 @@ const RoleForm = ({ onClose }: IProp) => {
 
 
     const mutation = useMutation(agent.Role.create, {
-        onSuccess: (successData) => {
+        onSuccess: (successData: IRole) => {
             console.log('created role', data)
             toast.success(`${successData.name} successfully created`);
             onClose();
@@ -102,7 +103,7 @@ const RoleForm = ({ onClose }: IProp) => {
                 <form onSubmit={methods.handleSubmit(onSubmit)} noValidate>
                     <div>
 
-                        <Input name="name" type="text" placeholder="Role Name" ref={methods.register} disabled={mutation.isLoading} />
+                        <Input name="name" type="text" placeholder="Role Name" disabled={mutation.isLoading} />
 
                         <Textarea name="description" placeholder="Role description" disabled={mutation.isLoading} />
                     </div>

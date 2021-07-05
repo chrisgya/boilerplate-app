@@ -2,7 +2,7 @@ import { Controller, useFormContext } from "react-hook-form";
 import DatePicker from 'react-date-picker/dist/entry.nostyle';
 import cx from "classnames";
 
-export const MyDatePicker = ({ label, name }: { label: string; name: string }) => {
+export const MyDatePicker = ({ label, name }: { label: string; name: any }) => {
   const { control, formState } = useFormContext();
 
   return (
@@ -11,12 +11,17 @@ export const MyDatePicker = ({ label, name }: { label: string; name: string }) =
         {label}
       </label>
       <Controller
-        as={DatePicker}
         control={control}
         name={name}
-        className={cx(formState.touched[name] && formState.errors[name] && "errorControl")}
+        render={({ field: { onChange, value } }) => (
+          <DatePicker
+            onChange={onChange}
+            value={value}
+            className={cx(formState.errors[name] && "errorControl")}
+          />
+        )}
       />
-      {!!formState.touched[name] && !!formState.errors[name] && (
+      {!!formState.errors[name] && (
         <p className="errorText">{formState.errors[name].message}</p>
       )}
     </div>

@@ -1,5 +1,31 @@
 https://fontawesome.com/v4.7.0/icons/
 
+https://github.com/tailwindlabs/tailwindcss-jit
+
+### To discover new releases of the packages
+
+```
+npm outdated
+```
+
+### To update to a new major version all the packages and run it
+
+```
+npm install -g npm-check-updates
+```
+
+### this will upgrade all the version hints in the package.json file, to dependencies and devDependencies, so npm can install the new major version
+
+```
+ncu -u
+```
+
+### install the new update
+
+```
+npm install
+```
+
 ## Getting Started
 
 First, run the development server:

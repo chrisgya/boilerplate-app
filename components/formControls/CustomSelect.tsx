@@ -6,7 +6,7 @@ import cx from "classnames";
 type CustomSelectProps = React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement> &
     Partial<CommonProps<any, boolean>> & {
         label: string;
-        name: string;
+        name: any;
         isSearchable?: boolean;
         isClearable?: boolean;
     };
@@ -29,17 +29,23 @@ const CustomSelect: FC<CustomSelectProps> = ({
             </label>
 
             <Controller
-                as={ReactSelect}
                 control={control}
                 name={name}
-                placeholder={placeholder}
-                options={options}
-                isMulti={isMulti}
-                isClearable={isClearable}
-                isSearchable={isSearchable}
-                className={cx("border-0 w-full p-1.5 my-0.5 focus:outline-none focus:ring focus:border-blue-300 shadow-md", formState.touched[name] && formState.errors[name] && "border-red-600 border border-solid")}
+                render={({ field: { value, onBlur, onChange } }) => (
+                    <ReactSelect
+                        placeholder={placeholder}
+                        options={options}
+                        isMulti={isMulti}
+                        isClearable={isClearable}
+                        isSearchable={isSearchable}
+                        className={cx("border-0 w-full p-1.5 my-0.5 focus:outline-none focus:ring focus:border-blue-300 shadow-md",
+                            formState.errors[name] && "border-red-600 border border-solid")} onBlur={onBlur}
+                        onChange={onChange}
+                        value={value}
+                    />
+                )}
             />
-            {formState.touched[name] && formState.errors[name] && (
+            {formState.errors[name] && (
                 <p className="border-red-600">
                     {formState.errors[name].message}
                 </p>

@@ -43,7 +43,7 @@ const UsernameForm = () => {
 
                     <div className="flex flex-wrap">
                         <div className="w-3/4 pr-2">
-                            <Input name="username" type="text" value={data?.username} ref={methods.register} label="Username" disabled={mutation.isLoading} />
+                            <Input name="username" type="text" value={data?.username} label="Username" disabled={mutation.isLoading} />
                         </div>
 
                         <div className="w-1/4 pl-2 mr-auto mt-7">

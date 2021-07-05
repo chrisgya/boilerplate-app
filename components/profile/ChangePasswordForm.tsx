@@ -41,9 +41,9 @@ const ChangePasswordForm = () => {
 
             <FormProvider {...methods}>
                 <form onSubmit={methods.handleSubmit(onSubmit)} noValidate>
-                    <Input name="password" type="password" ref={methods.register} placeholder="Password" disabled={mutation.isLoading} />
-                    <Input name="newPassword" type="password" ref={methods.register} placeholder="New Password" disabled={mutation.isLoading} />
-                    <Input name="confirmPassword" type="password" ref={methods.register} placeholder="Confirm New Password" disabled={mutation.isLoading} />
+                    <Input name="password" type="password" placeholder="Password" disabled={mutation.isLoading} />
+                    <Input name="newPassword" type="password" placeholder="New Password" disabled={mutation.isLoading} />
+                    <Input name="confirmPassword" type="password" placeholder="Confirm New Password" disabled={mutation.isLoading} />
 
                     <div className="flex justify-center">
                         <Button type="submit" name="Change Password" isBusy={mutation.isLoading} />

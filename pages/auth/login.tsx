@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import { useMutation } from 'react-query';
@@ -16,7 +16,6 @@ const defaultValues = {
 
 const Login = () => {
     const router = useRouter();
-    const passwordRef = useRef<HTMLInputElement>();
 
     const methods = useForm<ILoginRequest>({
         mode: "onChange",
@@ -37,7 +36,7 @@ const Login = () => {
         },
         onError: (error: AxiosResponse<IErrorMessage>) => {
             methods.setValue('password', '');
-            passwordRef.current?.focus();
+            methods.setError('password', {}, { shouldFocus: true });
             console.log('chrisgya error: ', error);
         }
     });
@@ -51,15 +50,13 @@ const Login = () => {
 
                 <FormProvider {...methods}>
                     <form onSubmit={methods.handleSubmit(onSubmit)} noValidate>
-                        <Input name="email" type="email" ref={methods.register} placeholder="Email" disabled={mutation.isLoading} />
-                        <Input name="password" type="password" ref={(e: HTMLInputElement) => {
-                            methods.register(e)
-                            passwordRef.current = e
-                        }} placeholder="Password" disabled={mutation.isLoading} />
+                        <Input name="email" type="email" placeholder="Email" disabled={mutation.isLoading} />
+                        <Input name="password" type="password" placeholder="Password" disabled={mutation.isLoading} />
 
                         <div className="flex justify-center">
                             <Button type="submit" name="Sign In" isBusy={mutation.isLoading} disabled={mutation.isLoading || Object.keys(methods.formState.dirtyFields).length < 1} />
                         </div>
+                        {/* {JSON.stringify(methods.formState, null, 2)} */}
                     </form>
                 </FormProvider>
 

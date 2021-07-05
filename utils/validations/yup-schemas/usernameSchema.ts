@@ -1,6 +1,6 @@
-import * as yup from "yup";
+import { object } from "yup";
 import { usernameValidation } from "./shared";
 
-export const usernameSchema = yup.object().shape({
+export const usernameSchema = object().shape({
     username: usernameValidation
 });

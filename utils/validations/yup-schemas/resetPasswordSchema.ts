@@ -1,11 +1,10 @@
-import * as yup from "yup";
+import { object, string, ref } from "yup";
 
 import { PasswordValidation } from "./shared";
 
-export const resetPasswordSchema = yup.object().shape({
+export const resetPasswordSchema = object().shape({
     password: PasswordValidation,
-    confirmPassword: yup
-        .string()
-        .oneOf([yup.ref('password')], 'Passwords are not the same!')
+    confirmPassword: string()
+        .oneOf([ref('password')], 'Passwords are not the same!')
         .required('Password confirmation is required!')
 });

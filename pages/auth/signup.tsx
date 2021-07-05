@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import { AxiosResponse } from 'axios';
 import Link from "next/link";
 import { useRouter } from 'next/router';
+import { DevTool } from "@hookform/devtools";
 import { agent, IErrorMessage, ISignupRequest, createUserSchema } from '../../utils';
 import { Button, Input, FormTitleAndError, FormLayout, InputFormat } from '../../components';
 
@@ -25,8 +26,6 @@ const Signup = () => {
     const router = useRouter();
 
     const topRef = useRef<HTMLDivElement>(null);
-    const usernameRef = useRef<HTMLInputElement>();
-    const emailRef = useRef<HTMLInputElement>();
 
     const methods = useForm<ISignupRequest>({
         mode: "onBlur",
@@ -49,8 +48,8 @@ const Signup = () => {
     const usernameMutation = useMutation(agent.Account.checkUsernameExist, {
         onSuccess: (data) => {
             if (!!data) {
-                methods.setValue("username", null);
-                usernameRef.current?.focus();
+                methods.setValue("username", '');
+                methods.setError('username', {}, { shouldFocus: true });
                 toast.error("username is taken already!");
             }
         }
@@ -59,8 +58,8 @@ const Signup = () => {
     const emailMutation = useMutation(agent.Account.checkEmailExist, {
         onSuccess: (data) => {
             if (!!data) {
-                methods.setValue("email", null);
-                emailRef.current?.focus();
+                methods.setValue("email", '');
+                methods.setError('email', {}, { shouldFocus: true });
                 toast.error("email is taken already!");
             }
         }
@@ -72,12 +71,12 @@ const Signup = () => {
     }
 
     const onUsernameBlur = async () => {
-        if (!methods.errors.username?.message)
+        if (!methods.formState.errors.username?.message)
             await usernameMutation.mutateAsync(methods.getValues("username"));
     }
 
     const onEmailBlur = async () => {
-        if (!methods.errors.email?.message)
+        if (!methods.formState.errors.email?.message)
             await emailMutation.mutateAsync(methods.getValues("email"));
     }
 
@@ -89,40 +88,34 @@ const Signup = () => {
 
                 <FormProvider {...methods}>
                     <form onSubmit={methods.handleSubmit(onSubmit)} noValidate>
-                        <Input name="username" type="text" ref={(e: HTMLInputElement) => {
-                            methods.register(e)
-                            usernameRef.current = e
-                        }} label="Username" onBlur={onUsernameBlur} disabled={mutation.isLoading} />
+                        <Input name="username" type="text" label="Username" onBlur={onUsernameBlur} disabled={mutation.isLoading} />
 
                         <div className="flex flex-wrap -mx-3">
                             <div className="w-full px-3 md:w-1/2">
-                                <Input name="firstName" type="text" ref={methods.register} label="First Name" disabled={mutation.isLoading} />
+                                <Input name="firstName" type="text" label="First Name" disabled={mutation.isLoading} />
                             </div>
                             <div className="w-full px-3 md:w-1/2">
-                                <Input name="lastName" type="text" ref={methods.register} label="Last Name" disabled={mutation.isLoading} />
+                                <Input name="lastName" type="text" label="Last Name" disabled={mutation.isLoading} />
                             </div>
                         </div>
 
                         <div className="flex flex-wrap -mx-3">
                             <div className="w-full px-3 md:w-1/2">
-                                <Input name="middleName" type="text" ref={methods.register} label="Middle Name" disabled={mutation.isLoading} />
+                                <Input name="middleName" type="text" label="Middle Name" disabled={mutation.isLoading} />
                             </div>
                             <div className="w-full px-3 md:w-1/2">
                                 <InputFormat name="mobileNo" type="tel" label="Mobile Number" disabled={mutation.isLoading} format="+234 (###) ###-####" mask="_" allowEmptyFormatting />
                             </div>
                         </div>
 
-                        <Input name="email" type="email" ref={(e: HTMLInputElement) => {
-                            methods.register(e)
-                            emailRef.current = e
-                        }} label="Email" onBlur={onEmailBlur} disabled={mutation.isLoading} />
+                        <Input name="email" type="email" label="Email" onBlur={onEmailBlur} disabled={mutation.isLoading} />
 
                         <div className="flex flex-wrap -mx-3">
                             <div className="w-full px-3 md:w-1/2">
-                                <Input name="password" type="password" ref={methods.register} label="Password" topClass="top-9" disabled={mutation.isLoading} />
+                                <Input name="password" type="password" label="Password" topClass="top-9" disabled={mutation.isLoading} />
                             </div>
                             <div className="w-full px-3 md:w-1/2">
-                                <Input name="confirmPassword" type="password" ref={methods.register} label="Confirm Password" topClass="top-9" disabled={mutation.isLoading} />
+                                <Input name="confirmPassword" type="password" label="Confirm Password" topClass="top-9" disabled={mutation.isLoading} />
                             </div>
                         </div>
 
@@ -132,6 +125,8 @@ const Signup = () => {
                         <p className="block mt-4 text-xs">By clicking the <i className="font-bold">"Create Account"</i> button, you agree to Chrisgya’s <Link href="/auth/login"><a className="font-bold text-blue-500">terms of acceptable use</a></Link></p>
 
                     </form>
+                    <DevTool control={methods.control} />
+
                 </FormProvider>
 
             </div>

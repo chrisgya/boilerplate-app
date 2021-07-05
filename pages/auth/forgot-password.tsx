@@ -5,6 +5,7 @@ import { useMutation } from 'react-query';
 import { FormProvider, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { AxiosResponse } from 'axios';
+import { DevTool } from "@hookform/devtools";
 import { agent, IErrorMessage, emailSchema } from '../../utils';
 import { Button, Input, FormLayout, FormTitleAndError } from '../../components';
 
@@ -42,12 +43,16 @@ const ForgetPasswordForm = () => {
 
                 <FormProvider {...methods}>
                     <form onSubmit={methods.handleSubmit(onSubmit)} noValidate>
-                        <Input name="email" type="email" ref={methods.register} placeholder="Email" disabled={mutation.isLoading} />
+                        <Input name="email" type="email" placeholder="Email" disabled={mutation.isLoading} />
+                        {/* <input {...methods.register("test")} /> */}
 
                         <div className="flex justify-center">
                             <Button type="submit" name="Request reset" isBusy={mutation.isLoading} disabled={mutation.isLoading || Object.keys(methods.formState.dirtyFields).length < 1} />
                         </div>
                     </form>
+
+                    <DevTool control={methods.control} />
+
                 </FormProvider>
 
             </div>

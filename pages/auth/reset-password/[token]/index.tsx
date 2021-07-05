@@ -52,8 +52,8 @@ const ResetPassword = ({ token }: Iprop) => {
 
                 <FormProvider {...methods}>
                     <form onSubmit={methods.handleSubmit(onSubmit)} noValidate>
-                        <Input name="password" type="password" ref={methods.register} placeholder="Password" disabled={mutation.isLoading} />
-                        <Input name="confirmPassword" type="password" ref={methods.register} placeholder="Confirm Password" disabled={mutation.isLoading} />
+                        <Input name="password" type="password" placeholder="Password" disabled={mutation.isLoading} />
+                        <Input name="confirmPassword" type="password" placeholder="Confirm Password" disabled={mutation.isLoading} />
 
                         <div className="flex justify-center">
                             <Button type="submit" name="Create Password" isBusy={mutation.isLoading} disabled={mutation.isLoading || Object.keys(methods.formState.dirtyFields).length < 1} />

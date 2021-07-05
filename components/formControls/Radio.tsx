@@ -17,19 +17,18 @@ const Radio: FC<RadioProps> = ({ name, label, disabled, value }) => {
                 <label
                     className={cx(
                         'radio',
-                        formState.touched[name] && formState.errors[name] && 'is-danger',
+                        formState.errors[name] && 'is-danger',
                     )}
                 >
                     <input
                         type="radio"
-                        name={name}
                         disabled={disabled}
                         value={value}
-                        ref={register}
+                        {...register(name)}
                     />
                     {label}
                 </label>
-                {formState.touched[name] && formState.errors[name] && (
+                {formState.errors[name] && (
                     <p className="help is-danger" role="alert">
                         {formState.errors[name].message}
                     </p>

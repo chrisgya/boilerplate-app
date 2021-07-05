@@ -24,10 +24,10 @@ const SelectInput: FC<SelectInputProps> = ({ name, label, selectOption }) => {
       <div
         className={cx(
           "border-0 p-1.5 my-0.5",
-          formState.touched[name] && formState.errors[name] && "errorControl"
+          formState.errors[name] && "errorControl"
         )}
       >
-        <select name={name} id={name} ref={register}>
+        <select id={name} {...register(name)}>
           {selectOption.map((v, k) => (
             <option key={k} value={v.value}>
               {v.display}
@@ -35,7 +35,7 @@ const SelectInput: FC<SelectInputProps> = ({ name, label, selectOption }) => {
           ))}
         </select>
 
-        {formState.touched[name] && formState.errors[name] && (
+        {formState.errors[name] && (
           <p className="errorText">{formState.errors[name].message}</p>
         )}
       </div>

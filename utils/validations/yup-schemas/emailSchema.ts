@@ -1,7 +1,7 @@
-import * as yup from "yup";
+import { object } from "yup";
 
 import { EmailValidation } from "./shared";
 
-export const emailSchema = yup.object().shape({
+export const emailSchema = object().shape({
     email: EmailValidation
 });

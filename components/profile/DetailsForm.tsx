@@ -49,14 +49,14 @@ const DetailsForm = () => {
 
                     <div className="flex flex-wrap -mx-3">
                         <div className="w-full px-3 md:w-1/2">
-                            <Input name="firstName" type="text" ref={methods.register} label="First Name" disabled={mutation.isLoading} />
+                            <Input name="firstName" type="text" label="First Name" disabled={mutation.isLoading} />
                         </div>
                         <div className="w-full px-3 md:w-1/2">
-                            <Input name="lastName" type="text" ref={methods.register} label="Last Name" disabled={mutation.isLoading} />
+                            <Input name="lastName" type="text" label="Last Name" disabled={mutation.isLoading} />
                         </div>
                     </div>
 
-                    <Input name="middleName" type="text" ref={methods.register} label="Middle Name" disabled={mutation.isLoading} />
+                    <Input name="middleName" type="text" label="Middle Name" disabled={mutation.isLoading} />
 
 
                     <div className="flex justify-center">

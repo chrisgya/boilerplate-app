@@ -1,9 +1,9 @@
-const TimePicker = require('react-time-picker/dist/entry.nostyle');
+const DateTimePicker = require('react-datetime-picker/dist/entry.nostyle');
 
 import { Controller, useFormContext } from "react-hook-form";
 import cx from "classnames";
 
-export const MyTimePicker = ({ label, name, value }: { label: string; name: any; value: any }) => {
+export const MyDateTimePicker = ({ label, name, value }: { label: string; name: any; value: any }) => {
   const { control, formState } = useFormContext();
 
   return (
@@ -15,7 +15,7 @@ export const MyTimePicker = ({ label, name, value }: { label: string; name: any;
         control={control}
         name={name}
         render={({ field: { onChange } }) => (
-          <TimePicker
+          <DateTimePicker
             onChange={onChange}
             value={value}
             className={cx(formState.errors[name] && "errorControl")}
